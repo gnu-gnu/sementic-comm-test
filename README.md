@@ -116,6 +116,20 @@ Sender                                          Receiver
 - Channel: AWGN 노이즈, 학습 시 SNR 0~20dB 랜덤 샘플링
 - Decoder: 16x4x4 → 128x128 RGB 복원
 
+## Tested On
+
+| 항목 | 버전 |
+|------|------|
+| OS | Linux 6.17.0-1014-nvidia |
+| GPU | NVIDIA GB10 (Blackwell, 122GB VRAM, Compute 12.1) |
+| Python | 3.12.8 |
+| CUDA | 13.0 |
+| PyTorch | 2.11.0+cu130 |
+| torchvision | 0.26.0+cu130 |
+| transformers | 5.4.0 |
+| TensorRT (optional) | 10.15.1.29 |
+| torch_tensorrt (optional) | 2.11.0 |
+
 ## 한계
 
 - **JSCC 과적합**: 단일 이미지 패치로 학습하여 다른 이미지에서는 성능 저하
