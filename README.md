@@ -104,3 +104,40 @@ Sender                                          Receiver
 - **Stage 2 vs Stage 4 간극**: JSCC는 채널 강건성만, Stage 4는 의미 이해만 — 둘의 통합이 시멘틱 통신의 미래
 
 자세한 내용은 [docs/limitations.md](docs/limitations.md)를 참고하세요.
+
+## 실험 결과
+
+### Stage 1: 전송량 효율성 비교
+
+![Stage 1](images/stage1_bandwidth.png)
+
+시멘틱 수준으로 갈수록 전송량이 극적으로 줄어든다. 캡션(99B)은 원본(28.3MB) 대비 약 30만 배 작다.
+
+### Stage 2: 채널 강건성 비교
+
+![Stage 2 Comparison](images/stage2_comparison.png)
+
+JPEG은 SNR 10dB 이하에서 완전히 붕괴(cliff effect)하지만, JSCC는 SNR 0dB에서도 화재 현장의 구조를 식별할 수 있다(graceful degradation).
+
+![Stage 2 Metrics](images/stage2_metrics.png)
+
+PSNR/SSIM 곡선에서 JPEG(빨간 점선)의 급격한 절벽 vs JSCC(초록 실선)의 완만한 곡선이 명확하게 대비된다.
+
+### Stage 3: E2E 속도 비교
+
+![Stage 3](images/stage3_speed.png)
+
+대역폭이 낮아질수록 전송 시간이 지배적이 되어 JSCC가 JPEG보다 빨라진다. FP32 기준 약 40Mbps 이하에서 JSCC가 유리하며, TensorRT 최적화 시 거의 모든 대역폭에서 JSCC가 우위를 가진다.
+
+### Stage 4: 시멘틱 이해
+
+![Stage 4 Semantic](images/stage4_semantic.png)
+
+동일한 화재 이미지에서 다양한 수준의 의미를 추출할 수 있다:
+- **캡셔닝 (99B)**: 장면을 자연어로 설명
+- **사람 검출 (770B)**: 소방관/구조대원 10명의 위치
+- **화염+사람 세그멘테이션 (86.6KB)**: 화염 영역(11.2%)과 사람 위치를 픽셀 단위로 분류
+
+![Stage 4 Bandwidth](images/stage4_bandwidth.png)
+
+Raw 픽셀에서 시멘틱 캡션까지, 전송량의 전체 스펙트럼을 보여준다. 태스크에 따라 필요한 의미 수준을 선택할 수 있다.
