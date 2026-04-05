@@ -131,9 +131,9 @@ def extract_patches(image_path, patch_size=128, stride=64):
 # Channel Simulation Utilities
 # ============================================================
 def snr_to_ber(snr_db):
-    """BPSK over AWGN: BER = 0.5 * erfc(sqrt(SNR_linear))"""
+    """BPSK over AWGN: BER = 0.5 * erfc(sqrt(SNR_linear / 2))"""
     snr_linear = 10 ** (snr_db / 10.0)
-    return 0.5 * erfc(np.sqrt(snr_linear))
+    return 0.5 * erfc(np.sqrt(snr_linear / 2))
 
 
 def corrupt_bitstream(data_bytes, ber):

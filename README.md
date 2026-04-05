@@ -12,11 +12,12 @@
 ## 구조
 
 ```
-models.py           # 모델 정의, 메트릭, 채널 시뮬레이션 유틸리티
-train.py            # JSCC 모델 학습 → jscc_model.pt 저장
-demo.py             # 학습된 모델로 3단계 비교 데모 실행
-image_4k.jpg        # 입력 이미지 (4K 화재 현장)
-docs/               # 최적화 교훈, 한계점 문서
+models.py              # 모델 정의, 메트릭, 채널 시뮬레이션 유틸리티
+train.py               # JSCC 모델 학습 → jscc_model.pt 저장
+demo.py                # 학습된 모델로 4단계 비교 데모 실행
+channel_pipeline.py    # 전체 통신 체인 E2E 시뮬레이션 (BPSK/QPSK/16-QAM + Hamming(7,4))
+image_4k.jpg           # 입력 이미지 (4K 화재 현장)
+docs/                  # 용어 정의, 채널 파이프라인 가이드, 최적화 교훈, 한계점 문서
 ```
 
 ## 요구사항
@@ -82,6 +83,9 @@ python demo.py --snr -10 -5 0 10 20
 | `stage2_comparison.png` | SNR별 복원 이미지 비교 그리드 |
 | `stage2_metrics.png` | PSNR/SSIM 곡선 (cliff effect vs graceful degradation) |
 | `stage3_speed.png` | E2E 지연시간 — 대역폭별 JPEG vs JSCC(FP32/FP16/TRT) |
+| `stage4_semantic.png` | 시멘틱 이해 — 캡셔닝, 사람 검출, 화염+사람 세그멘테이션 |
+| `stage4_bandwidth.png` | 전체 스펙트럼 전송량 비교 (Raw → Caption) |
+| `benchmark.md` | E2E 벤치마크 수치 리포트 |
 
 ## 모델 아키텍처
 
