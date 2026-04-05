@@ -73,7 +73,23 @@ SNR 범위 지정:
 python demo.py --snr -10 -5 0 10 20
 ```
 
-### 3. 출력
+### 3. 채널 파이프라인 시뮬레이션
+
+전체 통신 체인(JPEG + Hamming(7,4) + 변조 + AWGN)과 JSCC를 비교합니다.
+
+```bash
+python channel_pipeline.py
+```
+
+변조 방식 선택:
+```bash
+python channel_pipeline.py --modulations bpsk qpsk 16qam
+python channel_pipeline.py --modulations bpsk --snr 0 5 10 15 20
+```
+
+자세한 테스트 시나리오는 [docs/channel-pipeline-guide.md](docs/channel-pipeline-guide.md)를 참고하세요.
+
+### 4. 출력
 
 실행할 때마다 `yymmdd-hhmmss/` 타임스탬프 폴더가 생성됩니다.
 
@@ -108,6 +124,15 @@ Sender                                          Receiver
 - **Stage 2 vs Stage 4 간극**: JSCC는 채널 강건성만, Stage 4는 의미 이해만 — 둘의 통합이 시멘틱 통신의 미래
 
 자세한 내용은 [docs/limitations.md](docs/limitations.md)를 참고하세요.
+
+## 문서
+
+| 문서 | 내용 |
+|------|------|
+| [docs/glossary.md](docs/glossary.md) | 용어 및 개념 정리 — SNR, BER, PSNR, SSIM 등 수치 지표의 의미와 해석 |
+| [docs/channel-pipeline-guide.md](docs/channel-pipeline-guide.md) | 채널 파이프라인 테스트 시나리오 가이드 |
+| [docs/optimization-lessons.md](docs/optimization-lessons.md) | 추론 최적화 교훈 — 배치 처리, FP16, TensorRT, NVFP4 실험 결과 |
+| [docs/limitations.md](docs/limitations.md) | 데모 한계 및 시멘틱 통신의 지향점 |
 
 ## 실험 결과
 
