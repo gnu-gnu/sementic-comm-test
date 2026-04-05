@@ -1,0 +1,10 @@
+torch
+torchvision
+matplotlib
+scipy
+Pillow
+transformers
+
+# Optional: TensorRT backend
+# tensorrt
+# torch_tensorrt
